@@ -1,0 +1,37 @@
+services:
+  # Database for OrderEvents
+  order-events-db:
+    image: postgres
+    container_name: postgres_order_events
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=order_events_db
+    ports:
+      - 5432:5432
+    volumes:
+      - order_events_db_data:/var/lib/postgresql/data
+    networks:
+      - pgadmin_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8888:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks:
+      - pgadmin_network
+
+volumes:
+  order_events_db_data:
+  pgadmin:
+
+networks:
+  pgadmin_network:
+    driver: bridge
