@@ -2,7 +2,7 @@ package com.przemyslawren.OrderEventsProducer.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.przemyslawren.OrderEventsProducer.domain.OrderEvent;
+import com.przemyslawren.OrderEventsProducer.entity.OrderEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +28,7 @@ public class OrderEventsProducer {
     }
 
     public CompletableFuture<SendResult<Integer, String>> sendOrderEvent(OrderEvent orderEvent) throws JsonProcessingException {
-        var key = orderEvent.orderEventId();
+        var key = orderEvent.getOrderEventId();
         var value = objectMapper.writeValueAsString(orderEvent);
 
         var producerRecord = buildProducerRecord(key, value);

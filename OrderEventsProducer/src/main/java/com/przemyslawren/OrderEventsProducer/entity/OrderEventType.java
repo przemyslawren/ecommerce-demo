@@ -1,4 +1,4 @@
-package com.przemyslawren.OrderEventsProducer.domain;
+package com.przemyslawren.OrderEventsProducer.entity;
 
 public enum OrderEventType {
     ORDER_CREATED,
