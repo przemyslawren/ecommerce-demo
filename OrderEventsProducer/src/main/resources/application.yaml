@@ -9,6 +9,16 @@ spring:
   config:
     activate:
       on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/order_events_db
+    username: admin
+    password: admin
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+    show-sql: true
   kafka:
     topic: "order-events"
     producer:
@@ -20,15 +30,7 @@ spring:
     admin:
         properties:
             bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
-  datasource:
-    url: jdbc:postgresql://localhost:5432/order_events_db
-    username: admin
-    password: admin
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
+logging:
+  level:
+    org.hibernate: DEBUG
+    org.postgresql: DEBUG
